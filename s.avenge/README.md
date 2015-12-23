@@ -12,9 +12,6 @@ You better not to miss avenge.txt file!
 
 Or...you delete the file and changes you done become PERMANENT!!!
   
-Executable binary could be found here:
-
-https://sourceforge.net/projects/encryptyourdata/
 
 Run it: 
 
