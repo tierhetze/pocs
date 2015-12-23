@@ -1,0 +1,49 @@
+@(form: Form[(String,String)])(implicit flash: Flash)
+
+<html>
+    <head>
+        <title>DPost Web Mailer Login</title>
+        <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.ico")">
+        <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/login.css")">
+    </head>
+    <body>
+        
+        <header>
+            DPost &#169; Scala &#402; ( Play Framework )
+        </header>
+        
+        @helper.form(routes.Application.authenticate) {
+            
+            <h1 class="signInColor">Sign in</h1>
+            
+            @form.globalError.map { error =>
+                <p class="error">
+                    @error.message
+                </p>
+            }
+            
+            @flash.get("success").map { message =>
+                <p class="success">
+                    @message
+                </p>
+            }
+            
+            <p>
+                <input type="email" name="email" placeholder="Email" id="email" value="@form("email").value">
+            </p>
+            <p>
+                <input type="password" name="password" id="password" placeholder="Password">
+            </p>
+            <p>
+                <button type="submit" id="loginbutton">Login</button>
+            </p>
+            
+        }
+        
+        <p class="note">
+            Try <em>dpost@@dpost.com</em> with <em>secret</em> as password (Until you changed it).
+        </p>
+            
+    </body>
+</html>
+    

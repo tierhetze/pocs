@@ -1,0 +1,137 @@
+Java Client and C++ Server socket connection
+Java client connects C++ server socket and sends a message.
+Then C++ client replies, java gets the reply.
+Java:
+
+public void sendMessage(String notification) throws MessageException {
+Socket socket = null;
+BufferedReader br = null;
+BufferedWriter bw = null;
+try {
+socket = new Socket(host, port);
+OutputStream os = socket.getOutputStream();
+OutputStreamWriter osw = new OutputStreamWriter(os);
+bw = new BufferedWriter(osw);
+InputStream is = socket.getInputStream();
+InputStreamReader isr = new InputStreamReader(is);
+br = new BufferedReader(isr);
+String sendMessage = notification + '\n';
+bw.write(sendMessage);
+bw.flush();
+String message = br.readLine();
+if(!NOTIFICATION_ACCEPTED.equals(message)){
+throw new MessageException("not accepted");
+}
+} catch (UnknownHostException e) {
+logger.error("", e);
+throw new MessageException("", e);
+} catch (IOException e) {
+logger.error("", e);
+throw new MessageException("", e);
+} finally {
+try {
+br.close();
+} catch (IOException e) {
+logger.error("", e);
+}
+try {
+bw.close();
+} catch (IOException e) {
+logger.error("", e);
+}
+try {
+socket.close();
+} catch (IOException e) {
+logger.error("", e);
+}
+}
+}
+
+C++ code:
+
+#include "stdafx.h"
+#ifdef _WIN32
+#include <Winsock2.h>
+#pragma comment(lib, "Ws2_32.lib")
+#define SOCKET_ERRNO WSAGetLastError()
+#define ERRNO GetLastError()
+#else
+#define SOCKET_ERRNO errno
+#define ERRNO errno
+#define closesocket close
+#endif
+#include <io.h>
+#include <fcntl.h>
+#include <stdio.h>
+#include <conio.h>
+#include <errno.h>
+#include <iostream>
+#include <string>
+int _tmain(int argc, _TCHAR* argv[])
+{
+SOCKET hSocket,hAccept;
+struct sockaddr_in addr;
+int len = sizeof(addr);
+int nPort = 2009;
+int nRet; char Temp[10000];
+char ok[] = "OK\n";
+// Initialize winsock
+WSADATA stack_info ;
+WSAStartup(MAKEWORD(2,0), &stack_info) ;
+//Create socket
+hSocket = socket( PF_INET, SOCK_STREAM, 0 );
+if( hSocket == INVALID_SOCKET )
+{
+printf( "socket() error %d\n", SOCKET_ERRNO );
+getchar();
+exit(1);
+}
+//Listen to the socket
+addr.sin_family = AF_INET ;
+addr.sin_addr.s_addr = htonl (INADDR_ANY);
+addr.sin_port = htons ((unsigned short)nPort );
+if ( bind( hSocket, (struct sockaddr *)&addr, sizeof(addr)) == SOCKET_ERROR )
+{
+printf("bind() error\n");
+int c = getchar();
+printf("Got "+c);
+exit(1);
+}
+if ( listen( hSocket, 100) == SOCKET_ERROR )
+{
+printf("listen() error\n");
+int c = getchar();
+printf("Got2 "+c);
+exit(1);
+}
+printf("Waiting for a connection...");
+while( 1 )
+{
+hAccept = accept(hSocket, NULL, NULL);
+{
+// Messsage
+printf( "Accept incomming connection\n" );
+// Read request
+nRet = recv( hAccept, Temp, sizeof(Temp), 0 );
+if( nRet <= 0 )
+{
+printf( "recv() error %d\n", SOCKET_ERRNO );
+exit(1);
+}
+//valid text only until the \n
+for( int i = 0 ; i < strlen(Temp), Temp[i]!='\n' ; i ++ ){
+std::cout << Temp[i];
+}
+std::cout << std::endl;
+nRet = send( hAccept, ok, sizeof(ok)-1 , 0 );
+if( nRet == SOCKET_ERROR )
+{
+printf( "send() error %d\n", SOCKET_ERRNO );
+exit(1);
+}
+closesocket( hAccept );
+}
+}
+closesocket( hSocket );
+return 0;
+}

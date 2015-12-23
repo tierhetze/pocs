@@ -1,0 +1,34 @@
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+	http://www.springframework.org/schema/security
+	http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+
+    <beans:bean id="myFilter" class="com.beep02.ps.login.MyFilter"></beans:bean>
+
+	<http>
+		<intercept-url pattern="/app/dashboard*" access="ROLE_USER" />
+		<form-login login-processing-url="/app/j_spring_security_check" login-page="/app/login" default-target-url="/app/dashboard"
+			authentication-failure-url="/app/loginfailed" authentication-details-source-ref="myFilter"/>
+		<logout logout-url="/app/j_spring_security_logout" logout-success-url="/app/logout" />
+	</http>
+
+    
+
+	<authentication-manager>
+		<authentication-provider>
+			<user-service>
+				<user name="p1" password="1" authorities="ROLE_USER" />
+				<user name="p2" password="1" authorities="ROLE_USER" />
+				<user name="p3" password="1" authorities="ROLE_USER" />
+				<user name="p4" password="1" authorities="ROLE_USER" />
+				<user name="p5" password="1" authorities="ROLE_USER" />
+				<user name="p6" password="1" authorities="ROLE_USER" />
+			</user-service>
+		</authentication-provider>
+	</authentication-manager>
+	
+	
+
+</beans:beans>

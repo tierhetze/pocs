@@ -1,0 +1,89 @@
+@(title: Html, nav: String = "")(content: Html)
+
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>@title</title>
+        <meta name="viewport" content="width=device-width, user-scalable=no" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/bootstrap.css")">
+        
+        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/jquery-ui.css")">
+        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
+        <link rel="stylesheet" href="@routes.Assets.at("stylesheets/retina.css")" media="only screen and (-webkit-min-device-pixel-ratio: 2)">
+        
+        <link rel="apple-touch-icon-precomposed" href="@routes.Assets.at("images/icon.png")"/>
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="@routes.Assets.at("images/icon.png")">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="@routes.Assets.at("images/icon@2x.png")">
+        
+        <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.ico")" />
+        <script src="@routes.Assets.at("javascripts/vendor/zanimo.min.js")" type="text/javascript"></script>
+        <script src="@routes.Assets.at("javascripts/jquery-1.9.0.min.js")" type="text/javascript"></script>
+        <script src="@routes.Assets.at("javascripts/jquery-ui-1.10.3.js")" type="text/javascript"></script>
+        
+        <script type="text/javascript">
+            function logOut(){
+               return confirm("Would you like to close the session?");
+            }
+        </script> 
+        
+        
+     </head>
+     <body>
+        
+        <div class="topbar">
+            <div class="fill">
+                <div class="container">
+                    <a class="brand" href="@routes.Application.index()">DPost</a>
+                    <ul class="nav">
+                        <li class="@("active".when(nav == "configurationform"))">
+                            <a href="@routes.Configuration.form">Configuration</a>
+                        </li>
+                        <li class="@("active".when(nav == "dashboardform"))">
+                            <a href="@routes.Dashboard.dashboard">Dashboard</a>
+                        </li>
+                        <li class="@("active".when(nav == "templates"))">
+                            <a href="@routes.Templates.templates">Templates</a>
+                        </li>
+                        
+                        <li class="@("active".when(nav == "logout"))">
+                            <a href="@routes.Application.logout" onclick="return logOut();">LogOut</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+
+            <div class="content">
+                
+                <!-- div class="page-header">
+                    <h1>@title</h1>
+                </div-->
+
+                <div class="row">
+                    <div class="span14">
+                        @content
+                    </div>
+                </div>
+                
+            </div>
+
+            <footer>
+                <p>
+                    <a target="_blank" href="https://github.com/beep02/dpostserver">Dpost Source</a>
+                </p>
+                <p>
+                    &#169; DPost Master
+                </p>
+                
+                
+            </footer>
+
+        </div>
+        
+    </body>
+</html>

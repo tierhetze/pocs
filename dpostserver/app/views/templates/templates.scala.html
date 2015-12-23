@@ -1,0 +1,63 @@
+@(templates: TemplatesInfo)
+
+@import helper._
+@import helper.twitterBootstrap._
+
+
+
+
+@main(Html("Templates"), nav = "templates") {
+   <script type="text/javascript" src="@routes.Assets.at("javascripts/vendor/jquery.tablesorter.min.js")"></script>
+   <div class="templatesMain">
+      <div class="templatesRules">
+      <h4>Templates in DPost. Rules</h4>
+      </div>
+      <div class="templatesRulesList">
+      <li>Templates should be edited in your favorite editor</li>
+      <li>Templates are here on your disk: @templates.path</li>
+      <li>Templates name convention is simple: @templates.nameConvention</li>
+      <li>Templates should be simple and contain limited number of html elements(this is to be compatible with different e-mail clients)</li>
+      <li>Variables has such view in a template: {$varName}</li>
+      <li>Save templates in UTF-8 format (all good editors have that ability)</li>
+      <li>First line of the template will appear in e-mail subject. Second and following lines will appear in e-mail body.</li><BR>
+      Read more about templates and suggested editors in template.pdf
+      </div>
+      <BR>
+      <h4>Available templates:</h4>
+      <div class="templatesTable">
+         <table id="myTable" class="tablesorter"> 
+			<thead> 
+			<tr> 
+			    <th>Subject</th> 
+			    <th>Language</th> 
+			    <th>Region</th> 
+			    <th>Modified</th> 
+			</tr> 
+			</thead> 
+			<tbody>
+			@for(template <- templates.templates) {
+			<tr> 
+			    <td><a onclick="alert('You can not see templates by clicking on the link for security reasons,\nyou must copy the link URL into a separate browser window\nRight click on the link -> Copy Link Location(Firefox, Chrome)\nRight click on the link -> Copy Shortcut(IE)\nThere you open it for viewing')" target="_blank" href="@template.linkPath">@template.subject</a></td> 
+			    <td>@template.language</td> 
+			    <td>@template.region</td> 
+			    <td>@template.created</td> 
+			</tr> 
+			}
+			</tbody> 
+		</table> 
+      </div>
+      <img border="0" src="@routes.Assets.at("images/logo-main.png")" />
+   
+   
+   </div>
+
+ 
+
+
+
+		  
+		  
+	 
+    
+   
+}

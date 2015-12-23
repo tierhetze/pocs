@@ -1,0 +1,86 @@
+@(command: DPostStatus)
+
+@import helper._
+@import helper.twitterBootstrap._
+
+
+
+@main(Html("Dashboard"), nav = "dashboardform") {
+
+
+
+<script type="text/javascript">
+   window.App = { };
+   window.App.totalMemory = @command.totalMemory;
+</script>
+
+ 
+
+
+<script type="text/javascript" src="@routes.Assets.at("javascripts/main.js")"></script>
+
+
+
+<div class="actionsDashboardContainer">
+    <div class="actionsDashboardContainerLeft">
+           <div class="actionsDashboardCommandsStatus" class="statusBlock">
+		   @command.isStarted match {
+		       case true => {
+		        @helper.form(action = routes.Dashboard.startStop) {
+		        <p class="sysstatusGood">System Started</p>
+	            <div class="actionsDashboard">
+                    <input type="submit" name="startStop" onclick="return confirm('You are going to stop DPost\nOK to continue');" class="btn primary" value="Stop">
+                </div>
+                }
+               }
+		       case false => {
+		        <p class="sysstatusAlert">System Stopped</p>
+		        @helper.form(action = routes.Dashboard.startStop) {
+		        <div class="actionsDashboard">
+                   <input type="submit" name="startStop" onclick="return confirm('You are going to start DPost\nOK to continue');" class="btn primary" value="Start">
+                </div>
+                }
+		      }
+		   }
+		  </div>
+		  
+		  <br>
+		  
+		  <div class="actionsDashboardCommonStatus" class="statusBlock">
+		    <p class="sysstatusGood">Ability to send e-mails</p>
+		    <div id="commonStatusParent"></div>
+		  </div>
+		  
+		  <br>
+		  
+		  <div class="actionsDashboardStorageStatus" class="statusBlock">
+		    <p class="sysstatusGood">Storage status</p>
+		    <div id="storageStatusParent"></div>
+		  </div>
+		  
+		  <br>
+		  
+		  <div class="actionsDashboardCounters" class="statusBlock">
+		    <p class="sysstatusGood">Counters</p>
+            <p id="successCounterParent"></p>
+            <p id="failureCounterParent"></p>
+         </div>
+	</div>
+	
+	<div class="actionsDashboardContainerRight">
+	      <div id="monitoringBorder" class="statusBlock">
+		      <div id="monitoring" class="MachineryContainer">
+		      </div>
+		      <div id="updateStatusParent"></div>
+		      <div id="dashboardImageDiv">
+		      <img border="0" src="@routes.Assets.at("images/logo-main.png")" />
+		      </div>
+	      </div>
+	</div>
+</div>
+		  
+		  
+	 
+    
+   
+}

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<definitions id="definitions" targetNamespace="http://activiti.org/bpmn20"
+	xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:activiti="http://activiti.org/bpmn"
+	xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" 
+    xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC"
+    xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI">
+
+	<process id="addCompRequest" name="Propose and approve an interesting computer for the inventory">
+	
+	    <startEvent id="requestComputer">
+			<extensionElements>
+				<activiti:formProperty id="name"           name="Computer name" type="string"  required="true"/>
+				<activiti:formProperty id="introduced"	   name="Introduced"    type="date"    required="false"  datePattern="yyyy-MM-dd" />
+				<activiti:formProperty id="discontinued"   name="Discontinued"  type="date"    required="false"  datePattern="yyyy-MM-dd" />
+			</extensionElements>
+		</startEvent>
+		
+        <sequenceFlow id="flowRequestRegister" sourceRef="requestComputer" targetRef="registerRequest" />
+		
+
+		<serviceTask id="registerRequest" name="Create computer request"   activiti:expression="${businessProcessController.addProposal(name, introduced, discontinued)}"   activiti:resultVariable="computerRequest"/>
+		
+		
+		<sequenceFlow id="flowToApprove" sourceRef="registerRequest" targetRef="exclusiveGwToApprove"/>    
+		
+		
+		<exclusiveGateway id="exclusiveGwToApprove" name="Exclusive Gateway To Approve" />
+		
+		
+		<sequenceFlow id="flowApproveAutomatically" sourceRef="exclusiveGwToApprove" targetRef="approveItTask">
+		
+		    <conditionExpression xsi:type="tFormalExpression">${businessProcessController.automaticalApproval(computerRequest)}</conditionExpression>
+		    
+		</sequenceFlow>
+		
+		
+		         
+		<sequenceFlow id="flowUserApprove" sourceRef="exclusiveGwToApprove" targetRef="userApproveTask">
+		
+		    <conditionExpression xsi:type="tFormalExpression">${!businessProcessController.automaticalApproval(computerRequest)}</conditionExpression>
+		    
+		</sequenceFlow>  
+		
+		
+		<serviceTask id="approveItTask"  name="Approve automatically"  activiti:expression="${businessProcessController.approveProposal(computerRequest)}"/>
+		
+		
+		        
+		<userTask id="userApproveTask" name="Approve proposal">
+			<documentation>
+				${computerRequest.name} need to be approved to be added to the inventory
+			</documentation>
+			<extensionElements>
+				<activiti:formProperty id="id"    name="computer id"	type="long"    required="true" />
+				<activiti:formProperty id="name"  name="Computer name"  type="string"  required="true"/>
+			</extensionElements>
+		</userTask>
+		
+		
+		<sequenceFlow id="flowApprovedAutomatically" sourceRef="approveItTask" targetRef="theEnd"/>
+		
+				
+		<sequenceFlow id="flowApprovedManually" sourceRef="userApproveTask" targetRef="approveItTask"/>
+		
+			
+		<endEvent id="theEnd" />
+
+	</process>
+
+
+	
+
+</definitions>
+

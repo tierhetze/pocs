@@ -1,0 +1,33 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               controllers.Assets.at(path="/public", file)
+
+
+# Home page
+GET     /                           controllers.Application.index
+GET     /configurationform          controllers.Configuration.form
+POST    /configurationform          controllers.Configuration.result
+
+
+# dashboard
+GET     /dashboardform              controllers.Dashboard.dashboard
+POST    /dashboardform              controllers.Dashboard.startStop
+GET     /monitoring                 controllers.Dashboard.monitoring
+
+# templates
+GET     /templates                  controllers.Templates.templates
+
+
+
+#send e-mail endpoint
+POST    /dpost                      controllers.D.dpost
+
+
+GET     /login                      controllers.Application.login
+POST    /login                      controllers.Application.authenticate
+GET     /logout                     controllers.Application.logout
+
+
+

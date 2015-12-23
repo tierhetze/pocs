@@ -1,0 +1,35 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Default path will just redirect to the computer list
+GET     /                           @controllers.Application.index()
+GET     /proposals                  @controllers.Application.proposals()
+
+# Computers list (look at the default values for pagination parameters)
+GET     /computers                  @controllers.Application.list(p:Int ?= 0, s ?= "name", o ?= "asc", f ?= "")
+GET     /proposalsList              @controllers.Application.listProposals(p:Int ?= 0, s ?= "name", o ?= "asc", f ?= "")
+
+# Add computer
+GET     /computers/new              @controllers.Application.create()
+POST    /computers                  @controllers.Application.save()
+
+# Open window to add computer proposal
+GET     /computers/proposal         @controllers.Application.proposal()
+
+# Activiti user actions
+POST    /computers/saveproposal     @controllers.BusinessProcessController.saveProposal()
+POST    /proposals/:id              @controllers.BusinessProcessController.approve(id:Long)
+
+
+# Edit existing computer
+GET     /computers/:id              @controllers.Application.edit(id:Long)
+POST    /computers/:id              @controllers.Application.update(id:Long)
+
+# Delete a computer
+POST    /computers/:id/delete       @controllers.Application.delete(id:Long)
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               controllers.Assets.at(path="/public", file)
+
+

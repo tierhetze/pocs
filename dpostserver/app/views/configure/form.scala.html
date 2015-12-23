@@ -1,0 +1,230 @@
+@(mainConfig: Form[MainConfig], started:Boolean)
+
+@import helper._
+@import helper.twitterBootstrap._
+
+
+
+@main(Html("Configuration"), nav = "configurationform") {
+    
+    @if(started){
+       <div class="actions">
+          <span class="db-help-block">You can not change configuration while system is started</span>
+       </div>
+       <div class="actions">
+          <span class="db-help-block">Stop the system <a href="@routes.Dashboard.dashboard">here</a></span>
+        </div>
+    }
+    
+    @helper.form(action = routes.Configuration.result) {
+        
+        <fieldset>
+            <legend>DPost SMTP Configuration</legend>
+             <BR>
+             <div class="smtpSubTitle">
+             Sender address properties
+             </div>
+             
+             @inputText(
+                mainConfig("jmail_auth_user"), 
+                '_label -> "smtp user name", 
+                '_help -> "smtp user name of a sender mail client",
+                '_error -> mainConfig.globalError
+             )
+             
+             
+             
+             @inputText(
+                mainConfig("jmail_auth_password"), 
+                '_label -> "smtp user password", 
+                '_help -> "smtp user password of a sender mail client",
+                '_error -> mainConfig.globalError
+             )
+             
+             @inputText(
+                mainConfig("jmail_from_name"), 
+                '_label -> "mail from (company name)", 
+                '_help -> "your name or your company name",
+                '_error -> mainConfig.globalError
+             )
+             
+             @inputText(
+                mainConfig("jmail_from_address"), 
+                '_label -> "sender e-mail address", 
+                '_help -> "sender full e-mail address",
+                '_error -> mainConfig.globalError
+             )
+             
+             <div class="smtpSubTitle">
+             Sender session properties 
+             </div>
+             
+             @inputText(
+                mainConfig("jmail_session_property_mail_transport_protocol"), 
+                '_label -> "mail server protocol", 
+                '_help -> "supported: smtp",
+                '_error -> mainConfig.globalError
+             )
+             
+             @inputText(
+                mainConfig("jmail_session_property_mail_host"), 
+                '_label -> "mail server host", 
+                '_help -> "default: localhost",
+                '_error -> mainConfig.globalError
+             )
+             
+             @inputText(
+                mainConfig("jmail_session_property_mail_smtp_port"), 
+                '_label -> "mail server port", 
+                '_help -> "mail server port",
+                '_error -> mainConfig.globalError
+             )
+             
+             @checkbox(mainConfig("jmail_session_property_mail_smtp_auth"), 
+                '_label -> "is authentication required?", 
+                '_help -> "is authentication required?",
+                '_error -> mainConfig.globalError
+             
+             )
+             
+             @inputText(
+                mainConfig("jmail_session_property_mail_smtp_socketFactory_class"), 
+                '_label -> "jmail socket factory class", 
+                '_help -> "change only if you know what you do",
+                '_error -> mainConfig.globalError
+             )
+             
+             <div class="smtpExtra">
+             In special cases:<BR>
+             additional mail session properties you can add<BR>
+             to file conf/session.extra.properties<BR>
+             read more about that in installation.pdf
+             </div>
+             
+             
+        </fieldset>
+        
+        <fieldset>
+            <legend>DPost Common Configuration</legend>
+             
+            @inputText(
+                mainConfig("common_storage_size"), 
+                '_label -> "storageSize", 
+                '_help -> "Choose a storage queue size",
+                '_error -> mainConfig.globalError
+            )
+            @inputText(
+                mainConfig("common_check_time_msc"), 
+                '_label -> "checkTimeMsc", 
+                '_help -> "Choose checking interval (msc)",
+                '_error -> mainConfig.globalError
+            )
+            
+            
+            <fieldset>
+               <legend>Storage Type Choice</legend>
+            @select(
+               mainConfig("common_storageType"), 
+               options("1"->"In Memory","2"->"Data Base"),
+               '_label -> "storageType",
+               '_error -> mainConfig.globalError,
+               '_help -> "In memory or Data Base (press Update to change!)"
+            )
+            </fieldset>
+            
+        </fieldset>
+        
+        
+        @if(mainConfig("common_storageType").value.get.equals("2")){
+           <fieldset>
+            <legend>Data Base Storage (Enabled)</legend>
+             
+             @inputText(
+                mainConfig("db_driverClassName"), 
+                '_label -> "db driver class", 
+                '_help -> "change only if you know what you do",
+                '_error -> mainConfig.globalError
+             )
+             
+             @inputText(
+                mainConfig("db_url"), 
+                '_label -> "db url", 
+                '_help -> "example: jdbc:postgresql://localhost:5432/dpost",
+                '_error -> mainConfig.globalError
+             )
+             
+             @inputText(
+                mainConfig("db_username"), 
+                '_label -> "db username", 
+                '_help -> "db username",
+                '_error -> mainConfig.globalError
+             )
+             
+             @inputText(
+                mainConfig("db_password"), 
+                '_label -> "db password", 
+                '_help -> "db password",
+                '_error -> mainConfig.globalError
+             )
+             
+            </fieldset>
+        }else{
+        <fieldset>
+            <legend>Data Base Storage (Disabled)</legend>
+             
+             @inputText(
+                mainConfig("db_driverClassName"), 
+                '_label -> "db driver class", 
+                '_help -> "change only if you know what you do",
+                'readonly -> "readonly",
+                '_error -> mainConfig.globalError
+             )
+             
+             @inputText(
+                mainConfig("db_url"), 
+                '_label -> "db url", 
+                '_help -> "example: jdbc:postgresql://localhost:5432/dpost",
+                'readonly -> "readonly",
+                '_error -> mainConfig.globalError
+             )
+             
+             @inputText(
+                mainConfig("db_username"), 
+                '_label -> "db username", 
+                '_help -> "db username",
+                'readonly -> "readonly",
+                '_error -> mainConfig.globalError
+             )
+             
+             @inputText(
+                mainConfig("db_password"), 
+                '_label -> "db password", 
+                '_help -> "db password",
+                'readonly -> "readonly",
+                '_error -> mainConfig.globalError
+             )
+             
+            </fieldset>
+        }
+        
+        
+        
+        @if(started){
+	        <div class="actions">
+	          <span class="db-help-block">You can not change configuration while system is started</span>
+	        </div>
+	        <div class="actions">
+	          <span class="db-help-block">Stop the system <a href="@routes.Dashboard.dashboard">here</a></span>
+	        </div>
+        }else{
+	        <div class="actions">
+	            <input type="submit" name="applyconfig" onclick="return confirm('Configuration will be updated\nClick OK to continue');" class="btn primary" value="Update">
+	            <input type="submit" name="applyconfig" onclick="return confirm('All configuration will be back\nto the very initial state\nClick OK to continue');" class="btn primary" value="Reset">
+	            <a href="@routes.Application.index" class="btn">Cancel</a>
+	        </div>
+        }
+        <img border="0" src="@routes.Assets.at("images/logo-main.png")" />
+        
+    }
+    
+}

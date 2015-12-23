@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<service id="messaging-service" class="flex.messaging.services.MessageService">
+    <adapters>
+        <adapter-definition id="PushServiceAdapter" class="com.example.PushServiceAdapter"/>
+    </adapters>
+    <destination id="PushDestination">
+        <properties>
+            <network>
+                <session-timeout>0</session-timeout>
+                <throttle-inbound policy="ERROR" max-frequency="50"/>
+                <throttle-outbound policy="NONE" max-frequency="500"/>
+            </network>
+            <server>
+                <allow-subtopics>true</allow-subtopics>
+                <subtopic-separator>.</subtopic-separator>
+                <message-time-to-live>0</message-time-to-live>
+                <durable>true</durable>
+            </server>
+        </properties>
+        <channels>
+            <channel ref="push-channel-amf"/>
+        </channels>
+        <adapter ref="PushServiceAdapter"/>
+    </destination>
+</service>

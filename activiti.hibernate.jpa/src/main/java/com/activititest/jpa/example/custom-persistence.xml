@@ -1,0 +1,23 @@
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+	 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd"
+     version="1.0">
+     
+  <persistence-unit name="activiti-jpa-pu">
+    
+    <provider>org.hibernate.ejb.HibernatePersistence</provider>
+    
+    <class>com.activititest.jpa.example.VacationRequest</class>    
+    
+    <exclude-unlisted-classes>true</exclude-unlisted-classes>
+    
+     <properties>
+        <property name="hibernate.show_sql" value="true" />
+		<property name="hibernate.format_sql" value="true" />
+		<property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect" />
+		<property name="hibernate.hbm2ddl.auto" value="update" />
+    </properties>
+    
+  </persistence-unit>
+</persistence>
+

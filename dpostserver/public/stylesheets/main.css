@@ -1,0 +1,456 @@
+html, body {
+    background-color: #eee;
+}
+body {
+    padding-top: 40px; /* 40px to make the container go all the way to the bottom of the topbar */
+    color:black;
+    text-shadow: 0px 1px 1px rgba(255,255,255,0.1);
+}
+.container > footer p {
+    text-align: center; /* center align it with the container */
+}
+.container {
+    width: 820px; /* downsize our container to make the content feel a bit tighter and more cohesive. NOTE: this removes two full columns from the grid, meaning you only go to 14 columns and not 16. */
+}
+
+/* The white background content wrapper */
+.content {
+    background-color: #fff;
+    padding: 20px;
+    margin: 0 -20px; /* negative indent the amount of the padding to maintain the grid system */
+    -webkit-border-radius: 0 0 6px 6px;
+       -moz-border-radius: 0 0 6px 6px;
+            border-radius: 0 0 6px 6px;
+    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.15);
+       -moz-box-shadow: 0 1px 2px rgba(0,0,0,.15);
+            box-shadow: 0 1px 2px rgba(0,0,0,.15);
+    min-height: 10px;
+}
+
+/* Page header tweaks */
+.page-header {
+    background-color: #f5f5f5;
+    padding: 20px 20px 10px;
+    margin: -20px -20px 20px;
+}
+
+/* Styles you shouldn't keep as they are for displaying this base example only */
+.content .span10,
+.content .span4 {
+    min-height: 500px;
+}
+
+/* Give a quick and non-cross-browser friendly divider */
+.content .span4 {
+    padding-left: 9px;
+    margin-left: 10px;
+    border-left: 1px solid #eee;
+}
+
+.topbar .btn {
+    border: 0;
+}
+
+.topbar p {
+    color: #888;
+}
+
+.profile {
+    margin-left: 32px;
+}
+
+.profile:first-child > .danger {
+    display: none;
+}
+
+.phones label {
+    display: none;
+}
+
+.phones div:first-child label {
+    display: inline-block;
+}
+
+.manage {
+    margin-left: 32px;
+    margin-bottom: 20px;
+}
+
+.phone_template, .profile_template {
+    display: none;
+}
+
+div.actionsDashboardCommonStatus{
+   border: .1em solid #BDBDBD;
+   padding-left: 6px;
+   padding-top: 10px;
+   padding-bottom: 6px;
+}
+
+div.actionsDashboardStorageStatus{
+   border: .1em solid #BDBDBD;
+   padding-left: 6px;
+   padding-top: 10px;
+   padding-bottom: 6px;
+}
+
+div.actionsDashboardCounters{
+   border: .1em solid #BDBDBD;
+   padding-left: 6px;
+   padding-top: 10px;
+   padding-bottom: 6px;
+}
+
+div.actionsDashboardCommandsStatus{
+   border: .1em solid #BDBDBD;
+   padding-left: 6px;
+   padding-top: 10px;
+   padding-bottom: 6px;
+}
+
+div.licenseActivationProcess{
+	line-height: 200%;
+}
+
+.paypalInput{
+	height: 47px;
+	width: 122px;
+}
+
+div.licenseDiv{
+	text-align: justify;
+}
+
+.ui-dialog{
+	width: 420px !important;
+}
+
+div.licenseActivationProcessElementExplained{
+	font-size: 13px;
+	line-height: 130%;
+}
+p.pwarn{
+	color: red;
+}
+
+div.accordionLicense{
+	width: 400px;
+}
+#conditionsDialog{
+	width: 440px;
+}
+
+div.templatesRulesList{
+	padding-left: 6px;
+}
+
+span.failure{
+	color: red;
+}
+span.warning{
+	color: #FF4000;
+}
+
+.indexContainer {
+}
+
+.indexContainerLeft {
+	float: left;
+	width:46%;
+	text-align: justify;
+	border: .1em solid #BDBDBD;
+    padding-left: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-right: 5px;
+    height: 420px;
+}
+.indexContainerMiddle {
+	float: left;
+	width:2%;
+	text-align: justify;
+	padding-left: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-right: 5px;
+}
+.indexContainerRight {
+	float: left;
+	width:46%;
+	text-align: justify;
+	border: .1em solid #BDBDBD;
+    padding-left: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-right: 5px;
+    height: 420px;
+}
+
+.updateStatusContainerClass {
+	padding-left: 40px;
+	padding-right: 60px;
+	padding-top: 30px;
+}
+.newerDpostAvailableTitle{
+	font-size: 13px;
+	color: #FF1919;
+	font-weight: bolder;
+	line-height: 15px;
+}
+.newerDpostAvailableSubTitle{
+	font-size: 12px;
+	color: #1B1B1B;
+	line-height: 14px;
+}
+.newerDpostAvailableNewsLine{
+	font-size: 10px;
+	color: #1B1B1B;
+	line-height: 12px;
+	text-align: left;
+}
+
+
+
+.actionsDashboardContainer {
+	
+}
+
+.actionsDashboardContainerLeft {
+	width:50%;
+	float: left;
+}
+.actionsDashboardContainerRight {
+	width:50%;
+	float: left;
+	position:relative;
+	
+}
+
+.actionsDashboard {
+  
+}
+
+.actionsDashboardMonitor{
+	
+	float: left;
+    position:relative;
+}
+
+.actionsDashboardCounters{
+}
+
+
+
+
+.db-help-block {
+  font-size: 13px;
+  line-height: 18px;
+  color: red;
+}
+
+.titlelinemachinery {
+	    
+        font-size: 12px;
+        line-height: 20px;
+        color: #202126;
+        
+        padding-bottom: 15px;
+        
+}
+
+
+.ui-progressbar{
+   position: relative;
+}
+
+
+.progress-labelRPH {
+   position: absolute;
+   left: 45%;
+   top: 4px;
+   text-shadow: 1px 1px 0 #fff;
+}
+.progress-labelMEMORY {
+   position: absolute;
+   left: 45%;
+   top: 4px;
+   text-shadow: 1px 1px 0 #fff;
+}
+.progress-labelCPU {
+   position: absolute;
+   left: 45%;
+   top: 4px;
+   text-shadow: 1px 1px 0 #fff;
+}
+p.sysstatusAlert{
+	text-shadow: 1px 1px 0 #fff;
+	font-size: 12px;
+	color: red;
+}
+p.sysstatusGood{
+	text-shadow: 1px 1px 0 #fff;
+	font-size: 12px;
+	font-weight:bolder;
+	color: #454a4e;
+}
+p.sysstatusGoodStarted{
+	text-shadow: 1px 1px 0 #fff;
+	font-size: 12px;
+	font-weight:bold;
+	color: #5E40B2;
+}
+
+.titlewhitebold {
+        color:white;
+        font-weight: bold;
+        margin-left: 5px;
+}
+.screencurrent {
+        color:white;
+        font-weight: bold;
+        margin-left: 3px;
+}
+.screenmax {
+        color:white;
+        font-weight: bold;
+        margin-left: 3px;
+}
+
+.monitor {
+    margin: 10px auto;
+    width:302px;
+    height:123px;
+    background:url(/assets/images/monitor.png);
+    position:relative;
+    .titlewhitebold {
+        color:white;
+        position: absolute;
+        top: 8px;
+        left: 221px;
+    }
+    .screen {
+        display:block;
+        position: absolute;
+        font-size: 14px;
+        color:#454a4e;
+        text-shadow:0 1px 0px rgba(0,0,0,1);
+        background: black;
+        border-radius: 4px;
+        width: 60px;
+        height: 18px;
+        padding: 1px 5px 2px 5px;
+        margin-top: 4px;
+        text-align:center;
+        background-image: -moz-linear-gradient(top left, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+        background-image: -o-linear-gradient(top left, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+        background-image: -webkit-gradient(linear, 0 0, 100% 100%, from(rgba(255, 255, 255, 0.1)), to(rgba(255, 255, 255, 0)));
+        box-shadow: 0px 1px 1px #494e54,inset 0px 1px 2px rgba(0,0,0, 0.6);
+        &.current {
+            top: 28px;
+            left: 214px;
+        }
+        &.max {
+            top:55px;
+            left: 214px;
+        }
+    }
+}
+
+.wheel {
+    position:absolute;
+    width:13px;
+    height:13px;
+    top: 97px;
+    left: 99px;
+    background:url(/assets/images/wheel.png);
+}
+
+.needle {
+    -webkit-transform-origin:100% 50%;
+    -o-transform-origin:100% 50%;
+    -moz-transform-origin:100% 50%;
+    position:absolute;
+    top: 101px;
+    left: 30px;
+    height:5px;
+    width:76px;
+    background:url(/assets/images/needle.png);
+}
+
+button.gc {
+    display:block;
+    width: 296px;
+    margin: 10px auto;
+    background: #424A4E;
+    border-radius: 8px;
+    border-width: 0px;
+    -webkit-box-shadow: inset 0 1px 1px #707a81, 0 2px 3px rgba(0, 0, 0, 0.7);
+    -moz-box-shadow: inset 0 1px 1px #707a81, 0 2px 3px rgba(0, 0, 0, 0.7);
+    -o-box-shadow: inset 0 1px 1px #707a81, 0 2px 3px rgba(0, 0, 0, 0.7);
+    box-shadow: inset 0 1px 1px #707a81, 0 2px 3px rgba(0, 0, 0, 0.7);
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#484d53), to(#2e3436));
+    background-image: -moz-linear-gradient(top, #484d53, #2e3436);
+    background-image: -o-linear-gradient(top, #484d53, #2e3436);
+    height: 40px;
+    -webkit-font-smoothing: antialiased;
+    font-size: 18px;
+    color: #202126;
+    text-shadow: 0px 1px 0px rgba(255, 255,255, 0.1);
+    &.touch {
+        -webkit-box-shadow:inset 0px 2px 2px black,0 1px 1px #707a81;
+        -moz-box-shadow:inset 0px 2px 2px black,0 1px 1px #707a81;
+        -o-box-shadow:inset 0px 2px 2px black,0 1px 1px #707a81;
+        box-shadow:inset 0px 2px 2px black,0 1px 1px #707a81;
+        background-image: -webkit-gradient(linear, left top, left bottom, from(#2e3436), to(#484d53));
+        background-image: -moz-linear-gradient(top, #2e3436, #484d53);
+        background-image: -o-linear-gradient(top, #2e3436, #484d53);
+    }
+}
+
+div.light {
+    width:7px;
+    height:7px;
+    position: absolute;
+    top:11px;
+    left: 211px;
+    &.green {
+        background:url(/assets/images/green-light.png);
+    }
+    &.red {
+        background:url(/assets/images/red-light.png);
+    }
+}
+
+div.monitor{
+	margin: 10px auto;
+	position: relative;
+	top:11px;
+    left: 0px;
+}
+
+div.MachineryContainer{
+	margin-left: 40px;
+	width: 330px;
+}
+
+#dashboardImageDiv{
+   
+   padding-left: 40px;
+}
+div.smtpExtra{
+	width:300px;
+	padding-left: 150px;
+	font-size: 10px;
+	color: #222222;
+	padding-bottom: 30px;
+}
+ div.smtpSubTitle{
+    width:300px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+	padding-left: 150px;
+	font-size: 12px;
+	font-weight: bold;
+	color: #222222;
+ }
+

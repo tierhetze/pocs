@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<services-config>
+
+    <services>
+        <service id="AdvancedMessagingSupport" class="flex.messaging.services.AdvancedMessagingSupport"/> 
+        <service-include file-path="remoting-config.xml" />
+        <service-include file-path="messaging-config.xml" />
+    </services>
+    
+    <flex-client>
+        <reliable-reconnect-duration-millis>120000</reliable-reconnect-duration-millis>
+        <timeout-minutes>2</timeout-minutes>
+    </flex-client>
+    
+    <channels>
+    
+        <!-- request-response channel , we use it to invoke service methods on the server-->
+        <channel-definition id="req-res-channel-amf" class="mx.messaging.channels.AMFChannel">
+            <endpoint url="http://{server.name}:{server.port}/{context.root}/messagebroker/amfasync" class="flex.messaging.endpoints.AMFEndpoint"/>
+		</channel-definition>
+		
+		
+		<!-- streaming push channel , we use it to send data to client's subtopic -->
+		<channel-definition id="push-channel-amf" class="mx.messaging.channels.StreamingAMFChannel">
+            <endpoint url="http://{server.name}:{server.port}/{context.root}/messagebroker/streamingamf"     class="flex.messaging.endpoints.StreamingAMFEndpoint"/>
+            <properties>
+                <idle-timeout-minutes>0</idle-timeout-minutes>
+                <max-streaming-clients>10</max-streaming-clients>
+                <server-to-client-heartbeat-millis>5000</server-to-client-heartbeat-millis>
+            </properties>
+		</channel-definition>
+	</channels>
+    
+    
+    
+    <logging>
+        <target class="flex.messaging.log.ConsoleTarget" level="Info">
+            <properties>
+                <prefix>[BlazeDS] </prefix>
+                <includeDate>false</includeDate>
+                <includeTime>true</includeTime>
+                <includeLevel>true</includeLevel>
+                <includeCategory>true</includeCategory>
+            </properties>
+            <filters>
+                <pattern>Endpoint.*</pattern>
+                <pattern>Service.*</pattern>
+                <pattern>Configuration</pattern>
+            </filters>
+        </target>
+    </logging>
+
+    <system>
+        <redeploy>
+            <enabled>true</enabled>
+            <watch-interval>20</watch-interval>
+            <watch-file>src/resources/WEB-INF/flex/services-config.xml</watch-file>
+            <watch-file>src/resources/WEB-INF/flex/messaging-config.xml</watch-file>
+            <watch-file>src/resources/WEB-INF/flex/remoting-config.xml</watch-file>
+        </redeploy>
+    </system>
+
+</services-config>

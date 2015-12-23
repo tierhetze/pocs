@@ -1,0 +1,92 @@
+<project name="s.avenge" default="jar" basedir=".">
+  <description>
+        Avenge release build
+  </description>
+	
+  <property environment="env"/>
+	
+  <!--you need download scala and install it to have the home-->	
+  <property
+	    name="scala.home"
+	    value="${env.SCALA_HOME}"
+  />	
+  <property
+    name="sources.dir"
+    value="${basedir}/src/main/scala:${basedir}/src/main/resources"
+   />
+  <property
+    name="build.dir"
+    value="${basedir}/target/antbuild"
+  /> 
+	
+ <!-- it is a path to akka repo jars, that typically found in <user>/.ivy2/cache directory when SBT was executed on relative project-->	
+ <property
+	    name="akka.dir"
+	    value="${env.AKKA}"
+ />
+	<!-- it is a path to typesafe repo jars, that typically found in <user>/.ivy2/cache directory when SBT was executed on relative project-->
+ <property
+    name="typesafe.dir"
+    value="${env.TYPESAFE}"
+ />	
+	
+	
+	
+	
+  <target name="init">
+    <property
+      name="scala-library.jar"
+      value="${scala.home}/lib/scala-library.jar"/>
+	  
+	  <path id="build.classpath">
+	      <pathelement location="${scala-library.jar}"   />
+	      <pathelement location="${build.dir}"   />
+	  	  <pathelement location="${akka.dir}/akka-actor_2.11/jars/akka-actor_2.11-2.3.4.jar" />
+	      <pathelement location="${akka.dir}/akka-slf4j_2.11/jars/akka-slf4j_2.11-2.3.4.jar" />
+	  	  <pathelement location="${typesafe.dir}/config/bundles/config-1.2.1.jar" />
+	  	
+	  </path>
+	  	
+	  <taskdef resource="scala/tools/ant/antlib.xml">
+	   <classpath>
+	      <pathelement location="${scala.home}/lib/scala-compiler.jar"   />
+	      <pathelement location="${scala-library.jar}"   />
+	   	  <pathelement location="${scala.home}/lib/scala-reflect.jar" />
+	   	  
+	    </classpath>
+	  </taskdef>
+   </target>
+
+   <target name="build" depends="init">
+	   <mkdir dir="${build.dir}"   />
+   	   <scalac srcdir="${sources.dir}"  destdir="${build.dir}"  target="jvm-1.6"  classpathref="build.classpath">
+	     <include name="**/*.scala"   />
+   	     <include name="**/*.xml"   />
+	     <exclude name="forget/**/*.scala"   />
+	   </scalac> 
+   	   <copyfile src="${basedir}/src/main/resources/application.conf" dest="${build.dir}/application.conf"/>
+   </target>
+	
+	
+   <target name="jar" depends="build">	
+	 <jar destfile="${build.dir}/s.avenge.jar">
+	    <fileset dir="${build.dir}"/>
+	    <restrict>
+	     <name name="*.*"/>
+	     <archives>
+	       <zips>
+	         <fileset dir="${scala.home}/lib" includes="scala-library.jar"/>
+	       	 <fileset dir="${akka.dir}" includes="akka-slf4j_2.11/jars/akka-slf4j_2.11-2.3.4.jar"/>
+	       	 <fileset dir="${akka.dir}" includes="akka-actor_2.11/jars/akka-actor_2.11-2.3.4.jar"/>
+	       	 <fileset dir="${typesafe.dir}" includes="config/bundles/config-1.2.1.jar"/>
+	       </zips>
+	     </archives>
+	    </restrict>
+	    <manifest>
+	      <attribute name="Main-Class"
+	            value="beep02.avenge.Avenge"/>
+	    </manifest>
+	 </jar>
+    </target>
+	
+</project>

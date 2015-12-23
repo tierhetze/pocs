@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx" minWidth="955" minHeight="600">
+	
+	
+	<fx:Script>
+		<![CDATA[
+			import mx.collections.ArrayCollection;
+			import mx.controls.Alert;
+			import mx.messaging.Consumer;
+			import mx.messaging.events.MessageEvent;
+			import mx.messaging.events.MessageFaultEvent;
+			import mx.rpc.events.ResultEvent;
+			
+			import services.LoginController;
+			import services.SubscribtionsController;
+			
+			//example of publish-subscribe service
+			private var subscribtionsController:SubscribtionsController = new SubscribtionsController();
+			//example of "request-response" (async) service
+			private var loginController:LoginController                 = new LoginController();
+			
+			//save login token in this window (you may do better)
+			//after login this tocken sent to server in every command
+			private var userId:Number = 0;
+			
+			
+			//login
+		    public function login():void{
+				loginController.login(userName.text, loginResult);
+			}
+			private function loginResult(e:ResultEvent):void{
+				userId = e.result as Number;
+				userIdLabel.text=userId+"";
+			}
+			
+			
+			//quotes handling
+			public function subscribeQuotes():void{
+				if(userId==0){
+					Alert.show("You have to login before you subscribe");
+					return;
+				}
+				subscribtionsController.subscribe(userId, "quotes", messageHandler, faultHandler);
+			}
+			private function messageHandler(event:MessageEvent):void {
+				stockChart.dataProvider = event.message.body as ArrayCollection;
+			}
+			private function faultHandler(event:MessageFaultEvent):void{
+			}
+			public function unsubscribeQuotes():void{
+				if(userId==0){
+					Alert.show("You have to login before you unsubscribe");
+					return;
+				}
+				subscribtionsController.unsubscribe(userId, "quotes");
+			}
+			
+			
+			
+			
+			
+		
+			
+		]]>
+	</fx:Script>
+	
+	<mx:VBox width="100%">
+		<mx:BarChart width="100%" id="stockChart">
+			<mx:horizontalAxis>
+				<mx:CategoryAxis categoryField="name"/>
+			</mx:horizontalAxis>
+			<mx:series>
+				<mx:ColumnSeries xField="name" yField="price"/>
+			</mx:series>
+		</mx:BarChart>
+		<s:Label text="Enter User Name and Press Login">
+		</s:Label>
+		<s:TextInput id="userName">
+		</s:TextInput>
+		<s:Label id="userIdLabel">
+		</s:Label>
+		<s:Label text="When ID shows up above, you can subscribe">
+		</s:Label>
+		<mx:Button label="Login" click="login()"/>
+		<mx:Button label="Subscribe to Stocks" click="subscribeQuotes()"/>
+		<mx:Button label="UnSubscribe From Stocks" click="unsubscribeQuotes()"/>
+	</mx:VBox>   
+	
+</s:Application>

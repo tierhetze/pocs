@@ -1,0 +1,121 @@
+body {
+    margin-left: auto;
+    margin-right: auto;
+    width: 120em;
+}
+
+input {
+    margin: 0;
+}
+
+#subscribe_table{
+   font-size:7px;
+}
+
+table td {
+    padding: 0.2em;
+}
+
+#widget_title{
+   background-color: #ffffff;
+   font-weight: bold;
+   font-family: Arial;
+   padding: 0.2em;
+}
+
+#price_widget {
+    border: 1px solid black;
+    background-color: #ffffff;
+    height: 10em;
+}
+
+#trading_weather_widget{
+    border: 1px solid black;
+    background-color: #ffffff;
+    height: 11em;
+}
+
+
+
+#prices_eurusd {
+    float: left;
+    width: 19em;
+    height: 3em;
+    overflow: auto;
+    background-color: #f0f0f0;
+    padding: 0.2em;
+    border-right: 1px solid black;
+    font-family: Arial;
+}
+#prices_usdjpy {
+    float: left;
+    width: 19em;
+    height: 3em;
+    overflow: auto;
+    background-color: #f0f0f0;
+    padding: 0.2em;
+    border-right: 1px solid black;
+    font-family: Arial;
+}
+
+#weather_prices_eurusd {
+    float: left;
+    width: 12em;
+    height: 4em;
+    overflow: auto;
+    background-color: #f0f0f0;
+    padding: 0.2em;
+    border-right: 1px solid black;
+    font-family: Arial;
+}
+#weather_prices_usdjpy {
+    float: left;
+    width: 13em;
+    height: 4em;
+    overflow: auto;
+    background-color: #f0f0f0;
+    padding: 0.2em;
+    border-right: 1px solid black;
+    font-family: Arial;
+}
+#weather{
+    float: left;
+    width: 12em;
+    height: 4em;
+    overflow: auto;
+    background-color: yellow;
+    padding: 0.2em;
+    border-right: 1px solid black;
+    font-family: Arial;
+}
+
+
+#deals_widget {
+    border: 1px solid black;
+    background-color: #ffffff;
+    height: 15em;
+}
+
+#deals_eurusd {
+    float: left;
+    width: 19em;
+    height: 12em;
+    overflow: auto;
+    background-color: #f0f0f0;
+    padding: 0.2em;
+    border-right: 1px solid black;
+    font-family: Arial;
+}
+#deals_usdjpy {
+    float: left;
+    width: 19em;
+    height: 12em;
+    overflow: auto;
+    background-color: #f0f0f0;
+    padding: 0.2em;
+    border-right: 1px solid black;
+    font-family: Arial;
+}
+
+
+

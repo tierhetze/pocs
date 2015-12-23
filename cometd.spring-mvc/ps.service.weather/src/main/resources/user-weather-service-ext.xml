@@ -1,0 +1,30 @@
+<extensions>
+   <ext ext="WarmerInMoscow">
+     <users>
+         <user userName="p1">
+           <fields>
+              <field>
+                 <name>temperature</name>
+                 <value>+200</value>
+              </field>
+              <field>
+                 <name>air</name>
+                 <type>nice</type>
+              </field>
+           </fields>
+         </user>
+         <user userName="p2">
+           <fields>
+              <field>
+                 <name>temperature</name>
+                 <value>+202</value>
+              </field>
+              <field>
+                 <name>air</name>
+                 <type>nicer</type>
+              </field>
+            </fields>
+         </user>
+     </users>
+   </ext>      
+</extensions>

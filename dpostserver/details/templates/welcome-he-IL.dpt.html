@@ -1,0 +1,170 @@
+﻿{$username} Shalom (Subject in email clients not always supported in UTF-8, so do it in English!)
+
+<!--DPOST RULE: first line in template (it is above) is for subject, not part of the e-mail body-->
+<!--
+The guide how to develop templates, please read templates.pdf
+-->
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <meta http-equiv="content-language" content="he-IL">
+   <title>DPOST EXAMPLE EMAIL</title>
+</head>
+
+<body>
+
+<table width="600" cellpadding="0" cellspacing="0" bgcolor="ffffff">
+   <table  width="600" align="center" cellpadding="0" cellspacing="15" bgcolor="ffffff">
+       
+	   
+		
+		<tr>
+			<td height="48">
+				<table cellpadding="10" height="48" cellspacing="0" align="center" bgcolor="99351D" >
+					<tr>
+						<td width="570" height="26" bgcolor="FF0000" align="right"><h1 style="color: #ffffff !important; font-family: Arial, Helvetica, sans-serif; font-size: 24px; margin-bottom: 0!important; padding-bottom: 0;">שם החברה הגדולה שלך</h1></td>
+					</tr>
+					<tr>
+						<td width="570" height="22" bgcolor="99351D" align="right"><h2 style="color:#ffffff!important; font-family: Arial, Helvetica, sans-serif; font-size: 18px; margin-bottom: 0 !important; padding-bottom: 0; ">סיסמא נפלאה סופר</h2></td>
+					</td>
+				</table>
+			</td>
+		</tr>
+		
+		
+		<tr>
+			<td bgcolor="ffffff">
+				<table dir="rtl" bgcolor="ffffff"  cellpadding="0" cellspacing="0" align="center">
+					<tr>
+						<td bgcolor="ffffff" width="170" valign="top">
+							<table bgcolor="ffffff" cellpadding="5" cellspacing="0">
+								<tr>
+								   <td bgcolor="ffffff" width="170"><img src="http://dpostmailer.files.wordpress.com/2013/09/logo_96.png" width="170" />
+								   </td>
+								</tr>
+						    </table>
+						</td>
+						<td bgcolor="ffffff" width="15"></td>
+						<td bgcolor="ffffff" width="375" valign="bottom" colspan="3">
+							<h3 style="font-size: 22px; color: #FF0000 !important; font-family: Arial, Helvetica, sans-serif; ">מכתב פתיחה</h3>
+							<h4 style="font-size: 18px; color: #99351D !important; font-family: Arial, Helvetica, sans-serif; ">אנו שמחים לראות אותך!</h4>
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+		
+		<!-- TEMPLATE VARS START HERE -->
+		
+		<!-- note, hebrew and english mixed - forced me place mixed entries in different raws
+             if you o better workaround  - please, suggest.
+		-->
+		
+		<tr>
+			<td>
+				<table dir="rtl" bgcolor="ffffff" cellpadding="0" cellspacing="0" align="center">
+					<tr>
+						<td  align="right" bgcolor="ffffff" width="570"><p dir="rtl" style="font-size: 12px; color: #444444 !important; font-family: Arial, Helvetica, sans-serif;">ברוכים באים לחברה שלנו</p></td>
+					</tr>
+					<tr>
+						<td  align="right"  bgcolor="ffffff" width="570"><p dir="rtl" style="font-size: 12px; color: #444444 !important; font-family: Arial, Helvetica, sans-serif;"> {$username} <p></td>
+					</tr>
+					<tr>
+						<td align="right"  bgcolor="ffffff" width="570"><p dir="rtl"  style="font-size: 12px; color: #444444 !important; font-family: Arial, Helvetica, sans-serif;">  מודה לך על התעניינותך במוצר שלנו</p></td>
+					</tr>
+					<tr>
+						<td align="right"  bgcolor="ffffff" width="570"><p dir="rtl"  style="font-size: 12px; color: #444444 !important; font-family: Arial, Helvetica, sans-serif;"> {$product}</p></td>
+					</tr>
+					<tr>
+						<td  align="right"  bgcolor="ffffff" width="570"><p dir="rtl" style="font-size: 12px; color: #444444 !important; font-family: Arial, Helvetica, sans-serif;">אנא, צור איתי קשר לכל שאלה נוספת</p></td>
+					</tr>
+					<tr>
+						<td  align="right"  bgcolor="ffffff" width="570"><p dir="rtl" style="font-size: 12px; color: #444444 !important; font-family: Arial, Helvetica, sans-serif;">  דוא"ל ליצירת קשר </p></td>
+					</tr>
+					<tr>
+						<td  align="right"  bgcolor="ffffff" width="570"><p dir="rtl" style="font-size: 12px; color: #444444 !important; font-family: Arial, Helvetica, sans-serif;"> {$salesemail}  </p></td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+		
+		<!-- TEMPLATE VARS END HERE -->
+		
+		<tr>
+			<td height="15" bgcolor="ffffff"></td>
+		</tr>
+		
+		<!-- DPOST CONTENT STARTS HERE -->
+		
+		<tr>
+			<td>
+				<table cellpadding="10" cellspacing="0" align="center" bgcolor="99351D" >
+					<tr>
+						<td width="570" bgcolor="FF0000" align="right"><h1 style="color: #ffffff !important; font-family: Arial, Helvetica, sans-serif; font-size: 24px; margin-bottom: 0!important; padding-bottom: 0;">יש לנו גרסה החופשית של דפוסט</h1></td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+		
+		<tr>
+			<td height="15" bgcolor="ffffff"></td>
+		</tr>
+					
+		<tr>
+			<td>
+				<table bgcolor="ffffff" cellpadding="0" cellspacing="0" align="center">
+					<tr>
+						<td width="170" valign="top"  style="padding:5px;">
+							<img src="http://dpostmailer.files.wordpress.com/2013/09/logo_96.png" width="170" />
+						</td>
+						<td width="15"></td>
+						<td width="170" valign="top" style="padding:5px;">
+							<img src="http://dpostmailer.files.wordpress.com/2013/09/logo_96.png" width="170" />
+						</td>
+						<td width="15"></td>
+						<td width="170" valign="top" style="padding:5px;">
+							<img src="http://dpostmailer.files.wordpress.com/2013/09/logo_96.png" width="170" />
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+		
+		
+		<tr>
+			<td>
+				<table bgcolor="ffffff" cellpadding="0" cellspacing="0" align="center">
+					<tr>
+						<td width="180" bgcolor="ffffff" valign="top" align="center">
+							<h5 style="font-size: 18px; color: #444444 !important; font-family: Arial, Helvetica, sans-serif; ">התקנה</h5>
+							<a style="color: #99351D;" href="http://www.xyz.com/dpost/installation"><p>תסתכל כאן</p></a>
+						</td>
+						<td width="15" bgcolor="ffffff"></td>
+						<td width="180" bgcolor="ffffff" valign="top" align="center">
+							<h5 style="font-size: 18px; color: #444444 !important; font-family: Arial, Helvetica, sans-serif; ">ארכיטקטורה של תוכנה</h5>
+							<a style="color: #99351D;" href="http://www.xyz.com/dpost/architecture"><p>תסתכל כאן</p></a>
+						</td>
+						<td width="15" bgcolor="ffffff"></td>
+						<td width="180" bgcolor="ffffff" valign="top" align="center">
+							<h5 style="font-size: 18px; color: #444444 !important; font-family: Arial, Helvetica, sans-serif; ">דווח על תקלה</h5>
+							<a style="color: #99351D;" href="http://www.xyz.com/dpost/feedback"><p>תסתכל כאן</p></a>
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+		
+		<tr>
+			<td height="30" bgcolor="ffffff"></td>
+		</tr>
+		
+		<!-- DPOST CONTENT ENDS HERE -->
+		
+	</table>
+	
+	
+	
+</td></tr></table>
+
+</body>
+</html>

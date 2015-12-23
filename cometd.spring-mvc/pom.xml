@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	
+	<modelVersion>4.0.0</modelVersion><!--maven object model version-->
+	<groupId>com.beep02</groupId>
+	<artifactId>cometd.spring-mvc</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>cometd.spring-mvc</name>
+	<description>cometd.spring-mvc artifacts</description>
+
+	
+	
+	<!-- listed sub modules, the build order is the same, as in the list -->
+	<modules>
+	    <module>ps.core</module>
+	    <module>ps.service.price</module>
+		<module>ps.service.deals</module>
+		<module>ps.service.weather</module>
+		<module>ps.web.jmof</module>
+	</modules>
+	
+	<!-- if your project has a license, state it here -->
+	<licenses>
+	  <license>
+		<name>beep02</name>
+		<url></url>
+		<distribution></distribution>
+		<comments></comments>
+	  </license>
+	</licenses>
+	
+	<!--
+	
+	Skipped here:
+
+	continues integration management
+	
+	mailing lists
+	
+	-->
+	
+	
+	
+	<!-- your company name , url -->
+	<organization>
+		<name>beep02</name>
+		<url>https://github.com/beep02</url>
+    </organization>
+	
+	
+	<!-- people, working on the project -->
+	<developers>
+    
+	</developers>
+	
+	<profiles>
+	   
+	   <!-- custom profile for special needs--> 
+	   <profile>
+	            <!-- You hardly need that 
+				For the production build you better change profile settings in settings.xml on the production build machine
+				-->
+				
+	            <id>some-custom-build</id>
+				
+				<!-- 
+				You can change following elements of your default profile here:
+				<activation>...</activation>
+                <build>...</build>
+                <modules>...</modules>
+                <repositories>...</repositories>
+                <pluginRepositories>...</pluginRepositories>
+                <dependencies>...</dependencies>
+                <reporting>...</reporting>
+                <dependencyManagement>...</dependencyManagement>
+                <distributionManagement>...</distributionManagement>
+				-->
+	   </profile>			
+	
+	
+       <profile>
+	            <id>main-build</id>
+				
+				
+				<!-- do not forget to activate your profile -->
+				<activation>
+                   <activeByDefault>true</activeByDefault>
+                </activation>
+                
+			    <properties>
+				    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+				    <spring.version>3.1.2.RELEASE</spring.version>
+                    <cglib.version>2.2.2</cglib.version>
+                    <jackson.version>1.9.9</jackson.version>
+                    <logback.classic.version>1.0.6</logback.classic.version>
+                    <slf4j.version>1.6.5</slf4j.version>
+                    <org.hibernate.version>4.1.7.Final</org.hibernate.version>
+                    <org.apache.basic.datasource>1.4</org.apache.basic.datasource>
+                    <hsqldb.version>1.8.0.10</hsqldb.version>
+                    <junit.version>4.8.2</junit.version>
+                    <servlet-api.version>2.5</servlet-api.version>
+                    <cometd.version>2.6.0</cometd.version>
+                    <log4j.version>1.2.17</log4j.version>
+				</properties>
+				
+				
+				<!-- plugin. generating nice HTML reports (in project site) after the test -->
+				
+				<reporting>
+					<plugins>
+					  <plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-surefire-report-plugin</artifactId>
+						<version>2.14</version>
+					  </plugin>
+					</plugins>
+				</reporting>
+	
+	            <dependencyManagement>
+					<dependencies>
+					
+					<dependency>
+					  <groupId>junit</groupId>
+					  <artifactId>junit</artifactId>
+					  <version>${junit.version}</version>
+					  <scope>test</scope><!-- this will be used during test -->
+					</dependency>
+					
+					<dependency>
+					  <groupId>org.apache.commons</groupId>
+                      <artifactId>commons-lang3</artifactId>
+					  <version>${commons-lang3.version}</version>
+					  <scope>compile</scope><!-- this will be used in compile time and will be included in final artifact -->
+					</dependency>
+					
+					<dependency>
+					  <groupId>javax.servlet</groupId>
+                      <artifactId>servlet-api</artifactId>
+					  <version>${servlet-api.version}</version>
+					  <scope>provided</scope> <!-- this will not be included in the WAR, so scope is provided -->
+					</dependency>
+					
+					</dependencies>
+				</dependencyManagement>
+
+	
+				<!-- build environment settings, java version -->
+				
+				<build>
+					<pluginManagement>
+						<plugins>
+						   
+						   <!-- plugin responsible to set java version during compilation(in this case it applied to all sub projects) -->
+						
+						   <plugin>
+							<groupId>org.apache.maven.plugins</groupId>
+							<artifactId>maven-compiler-plugin</artifactId>
+							<version>3.0</version>
+							<configuration>
+							  <source>1.7</source>
+							  <target>1.7</target>
+							</configuration>
+						   </plugin>
+						   
+						   <!-- 
+						   plugin responsible to customize WARs (in this case it is applied to all sub projects - wars) 
+						   but you may customize any of subprojects, using the same plugin and changing configuration of the plugin
+						   -->
+						   <plugin>
+							<artifactId>maven-war-plugin</artifactId>
+							<version>2.3</version>
+							<configuration>
+							  <!--packagingExcludes>/WebContent/WEB-INF/lib/popa.jar</packagingExcludes-->
+							  <archive>
+								<manifest>
+								  <addClasspath>true</addClasspath>
+								  <classpathPrefix>lib/</classpathPrefix>
+								</manifest>
+							  </archive>
+							  <webXml>src\main\webapp\WEB-INF\web.xml</webXml>        
+                            </configuration>
+						   </plugin>
+						   
+						   <!-- plugin responsible to customize test (in this case it applied to all sub projects) -->
+						   
+						   <plugin>
+							<groupId>org.apache.maven.plugins</groupId>
+							<artifactId>maven-surefire-plugin</artifactId>
+							<version>2.14</version>
+							<!-- test can be customised here -->
+						  </plugin>
+						</plugins>
+					</pluginManagement>
+				</build>
+
+	
+				<repositories>
+					<!-- DEFINE! -->
+				</repositories>
+	
+	
+	
+				<!-- repos used to upload artifacts (developer's product) -->
+				<!-- use "mvn deploy" command to upload there-->
+				<distributionManagement>
+					
+					<!-- DEFINE! -->
+					
+					<!-- WEB site installation requires Apache like web server with WEBDAV support -->
+					<!-- mvn site:stage
+                     will create the entire site, including sub-modules and links to them on your machine in project/target/stage
+                    -->
+					<site>
+					  <id>mysite</id>
+					  <!-- you need real URL to deploy the site with "mvn site deploy"  see an example of such server installation here: http://www.mkyong.com/maven/how-to-deploy-site-with-mvn-site-deploy-webdav-example/-->
+					  <url></url>
+					</site>
+				</distributionManagement>
+				
+				
+	   </profile>
+   </profiles>
+   
+	
+</project>

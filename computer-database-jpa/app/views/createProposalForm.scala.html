@@ -1,0 +1,35 @@
+@(computerProposalForm: Form[ComputerProposal], storage: services.StorageService)
+
+@import helper._
+
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) } 
+
+@main {
+    
+    <h1>Propose new computer for the inventory</h1>
+    
+    
+    @form(routes.BusinessProcessController.saveProposal()) {
+        
+        <fieldset>
+        
+            @inputText(computerProposalForm("name"), '_label -> "Computer name")
+            @inputText(computerProposalForm("introduced"), '_label -> "Introduced date")
+            @inputText(computerProposalForm("discontinued"), '_label -> "Discontinued date")
+            
+        </fieldset>
+        
+        <div class="actions">
+            <input type="submit" value="Propose this computer" class="btn primary"> or 
+            <a href="@routes.Application.list()" class="btn">Cancel</a> 
+        </div>
+        
+    }
+    
+    
+    
+    
+    
+    
+    
+}
