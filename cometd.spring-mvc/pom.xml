@@ -98,7 +98,7 @@
                     <org.hibernate.version>4.1.7.Final</org.hibernate.version>
                     <org.apache.basic.datasource>1.4</org.apache.basic.datasource>
                     <hsqldb.version>1.8.0.10</hsqldb.version>
-                    <junit.version>4.8.2</junit.version>
+                    <junit.version>4.13.1</junit.version>
                     <servlet-api.version>2.5</servlet-api.version>
                     <cometd.version>2.6.0</cometd.version>
                     <log4j.version>1.2.17</log4j.version>
